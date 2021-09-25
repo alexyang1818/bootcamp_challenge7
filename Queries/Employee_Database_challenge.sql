@@ -1,13 +1,3 @@
--- SELECT emp_no,
--- 	first_name,
--- 	last_name
--- FROM employees;
-
--- SELECT title,
--- 	from_date,
--- 	to_date
--- FROM title;
-
 SELECT * FROM employees;
 SELECT * FROM title;
 
@@ -73,3 +63,31 @@ ORDER BY e.emp_no ASC,
 -- INTO nameyourtable
 -- FROM _______
 -- ORDER BY _____, _____ DESC;
+
+SELECT COUNT(title), title
+INTO mentorship_eligibility_retiring_titles
+FROM mentorship_eligibility
+GROUP BY title
+ORDER BY count DESC;
+
+SELECT * FROM retiring_titles;
+SELECT SUM(count) FROM mentorship_eligibility_retiring_titles;
+
+SELECT rt.title,
+	rt.count AS retiring,
+	mert.count AS num_of_mentor
+	-- (mert.count * rt.count * 10000) AS ratio
+FROM retiring_titles AS rt
+	LEFT JOIN mentorship_eligibility_retiring_titles AS mert
+		ON rt.title = mert.title;
+
+SELECT COUNT(emp_no) 
+FROM dept_emp
+WHERE to_date = '9999-01-01';
+
+
+
+
+
+
+
